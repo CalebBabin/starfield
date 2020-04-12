@@ -7,9 +7,10 @@ const globalConfig = {
 	emoteSpeedRatio: 0.75, // set to 1 for 1:1 movement with the star speed
 	emoteScale: 3,
 	starScale: 0.1,
+	starLength: 3,
 	spawnAreaSize: 80,
 	safeSpace: 3,
-	spawnRate: 1,
+	spawnRate: 1.4,
 	cameraDistance: 250,
 	cameraFar: 1000,
 }
@@ -22,7 +23,7 @@ const widthRatio = Math.min(window.innerWidth / window.innerHeight, 1);
 const heightRatio = Math.min(window.innerHeight / window.innerWidth, 1);
 
 const plane_geometry = new THREE.PlaneBufferGeometry(globalConfig.emoteScale, globalConfig.emoteScale);
-const star_geometry = new THREE.SphereBufferGeometry(globalConfig.starScale);
+const star_geometry = new THREE.BoxBufferGeometry(globalConfig.starScale, globalConfig.starScale, globalConfig.starScale*globalConfig.starLength);
 const star_material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
 window.addEventListener('DOMContentLoaded', () => {
