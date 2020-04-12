@@ -16,7 +16,11 @@ const globalConfig = {
 }
 
 const getSpawnPosition = () => {
-	return (Math.random() > 0.5 ? -1 : 1) * (((globalConfig.spawnAreaSize - globalConfig.safeSpace) * Math.random() / 2) + globalConfig.safeSpace);
+	const direction = Math.random()*Math.PI*2;
+	const distance = Math.random()*(globalConfig.spawnAreaSize - globalConfig.safeSpace) + globalConfig.safeSpace;
+	const x = Math.sin(direction)*distance*widthRatio;
+	const y = Math.cos(direction)*distance*heightRatio;
+	return { x, y };
 }
 
 const widthRatio = Math.min(window.innerWidth / window.innerHeight, 1);
@@ -65,8 +69,9 @@ window.addEventListener('DOMContentLoaded', () => {
 			spawnTick -= 1;
 
 			const mesh = new THREE.Mesh(star_geometry, star_material);
-			mesh.position.x = getSpawnPosition()*widthRatio;
-			mesh.position.y = getSpawnPosition()*heightRatio;
+			const position = getSpawnPosition();
+			mesh.position.x = position.x;
+			mesh.position.y = position.y;
 
 
 			stars.push({
@@ -95,8 +100,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (!emotes.group) {
 				emotes.group = new THREE.Group();
-				emotes.group.position.x = getSpawnPosition()*widthRatio;
-				emotes.group.position.y = getSpawnPosition()*heightRatio;
+				const position = getSpawnPosition();
+				emotes.group.position.x = position.x;
+				emotes.group.position.y = position.y;
 				emotes.initGroup = true;
 			}
 
