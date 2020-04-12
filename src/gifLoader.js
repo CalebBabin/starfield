@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+const frameLimit = 128;
 class GIF_Instance {
 	constructor(id) {
 		this.id = id;
@@ -22,8 +23,10 @@ class GIF_Instance {
 					} else {
 						this.gifTiming = data.frames[0].delay;
 						this.frames = data.frames;
-						for (let index = 0; index < data.frames.length; index++) {
-							const frame = data.frames[index];
+						if (this.frames.length > frameLimit) this.frames = this.frames.splice(0, frameLimit);
+						
+						for (let index = 0; index < this.frames.length; index++) {
+							const frame = this.frames[index];
 							frame.image = new Image(frame.width, frame.height);
 							frame.image.crossOrigin = "anonymous";
 							frame.image.addEventListener('load', () => {
