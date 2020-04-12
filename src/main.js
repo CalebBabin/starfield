@@ -14,7 +14,7 @@ const globalConfig = {
 }
 
 const getSpawnPosition = () => {
-	return (Math.random() > 0.5 ? -1 : 1) * (globalConfig.spawnAreaSize * Math.random() / 2) + globalConfig.safeSpace;
+	return (Math.random() > 0.5 ? -1 : 1) * (((globalConfig.spawnAreaSize - globalConfig.safeSpace) * Math.random() / 2) + globalConfig.safeSpace);
 }
 
 const plane_geometry = new THREE.PlaneBufferGeometry(globalConfig.emoteScale, globalConfig.emoteScale);
