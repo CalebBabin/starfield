@@ -5,7 +5,7 @@ const chatIntegration = require('./chat.js');
 const globalConfig = {
 	speed: 0.003,
 	emoteScale: 3,
-	starScale: 0.075,
+	starScale: 0.1,
 	spawnAreaSize: 50,
 	safeSpace: 3,
 	spawnRate: 1,
