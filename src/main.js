@@ -6,7 +6,7 @@ const globalConfig = {
 	speed: 0.003,
 	emoteScale: 3,
 	starScale: 0.1,
-	spawnAreaSize: 50,
+	spawnAreaSize: 80,
 	safeSpace: 3,
 	spawnRate: 1,
 	cameraDistance: 250,
@@ -16,6 +16,9 @@ const globalConfig = {
 const getSpawnPosition = () => {
 	return (Math.random() > 0.5 ? -1 : 1) * (((globalConfig.spawnAreaSize - globalConfig.safeSpace) * Math.random() / 2) + globalConfig.safeSpace);
 }
+
+const widthRatio = Math.min(window.innerWidth / window.innerHeight, 1);
+const heightRatio = Math.min(window.innerHeight / window.innerWidth, 1);
 
 const plane_geometry = new THREE.PlaneBufferGeometry(globalConfig.emoteScale, globalConfig.emoteScale);
 const star_geometry = new THREE.SphereBufferGeometry(globalConfig.starScale);
@@ -60,8 +63,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			spawnTick -= 1;
 
 			const mesh = new THREE.Mesh(star_geometry, star_material);
-			mesh.position.x = getSpawnPosition();
-			mesh.position.y = getSpawnPosition();
+			mesh.position.x = getSpawnPosition()*widthRatio;
+			mesh.position.y = getSpawnPosition()*heightRatio;
 
 
 			stars.push({
@@ -90,8 +93,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (!emotes.group) {
 				emotes.group = new THREE.Group();
-				emotes.group.position.x = getSpawnPosition();
-				emotes.group.position.y = getSpawnPosition();
+				emotes.group.position.x = getSpawnPosition()*widthRatio;
+				emotes.group.position.y = getSpawnPosition()*heightRatio;
 				emotes.initGroup = true;
 			}
 
