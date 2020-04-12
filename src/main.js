@@ -3,13 +3,13 @@ import * as THREE from 'three';
 const chatIntegration = require('./chat.js');
 
 const globalConfig = {
-	speed: 0.01,
+	speed: 0.003,
 	emoteScale: 3,
 	starScale: 0.075,
 	spawnAreaSize: 50,
 	safeSpace: 3,
 	spawnRate: 1,
-	cameraDistance: 100,
+	cameraDistance: 400,
 	cameraFar: 1000,
 }
 
