@@ -7,9 +7,9 @@ const globalConfig = {
 	emoteSpeedRatio: 0.75, // set to 1 for 1:1 movement with the star speed
 	emoteScale: 3,
 	starScale: 0.1,
-	starLength: 3,
+	starLength: 6,
 	spawnAreaSize: 80,
-	safeSpace: 3,
+	safeSpace: 4,
 	spawnRate: 1.4,
 	cameraDistance: 250,
 	cameraFar: 1000,
