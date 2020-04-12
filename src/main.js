@@ -4,6 +4,7 @@ const chatIntegration = require('./chat.js');
 
 const globalConfig = {
 	speed: 0.003,
+	emoteSpeedRatio: 0.75, // set to 1 for 1:1 movement with the star speed
 	emoteScale: 3,
 	starScale: 0.1,
 	spawnAreaSize: 80,
@@ -108,7 +109,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				scene.remove(emotes.group);
 				chatIntegration.emotes.splice(index, 1);
 			} else {
-				emotes.progress += globalConfig.speed;
+				emotes.progress += globalConfig.speed*globalConfig.emoteSpeedRatio;
 
 				for (let i = 0; i < emotes.emotes.length; i++) {
 					const emote = emotes.emotes[i];
