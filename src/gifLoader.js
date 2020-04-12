@@ -20,7 +20,6 @@ class GIF_Instance {
 			fetch(`https://gif-emotes.opl.io/gif/${id}`)
 				.then(r => r.json())
 				.then(data => {
-					console.log(emoteBlacklist.includes(id))
 					if (data.count === 0 || !data.count || emoteBlacklist.includes(id)) {
 						this.url = `https://gif-emotes.opl.io/gif/${id}.gif`
 						this.imageFallback();
