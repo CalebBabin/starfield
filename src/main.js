@@ -9,7 +9,7 @@ const globalConfig = {
 	spawnAreaSize: 50,
 	safeSpace: 3,
 	spawnRate: 1,
-	cameraDistance: 400,
+	cameraDistance: 250,
 	cameraFar: 1000,
 }
 
