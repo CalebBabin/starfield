@@ -16,6 +16,7 @@ class GIF_Instance {
 
 		if (id.match(/http/)) {
 			this.url = id;
+			this.imageFallback();
 		} else {
 			fetch(`https://gif-emotes.opl.io/gif/${id}`)
 				.then(r => r.json())
