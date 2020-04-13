@@ -5,6 +5,7 @@ const emoteBlacklist = [
 	'5e0ea4610550d42106b8955a',
 	'566ca38765dbbdab32ec0560',
 	'55cb47a82718127806ad3202',
+	'5e6fa08bd112fc3725746dd4',
 ]
 class GIF_Instance {
 	constructor(id) {
