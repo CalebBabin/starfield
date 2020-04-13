@@ -51,10 +51,7 @@ class GIF_Instance {
 		this.ctx = this.canvas.getContext('2d');
 
 		this.texture = new THREE.CanvasTexture(this.canvas);
-		//this.rot_texture = new THREE.CanvasTexture(this.canvas);
-		//this.rot_texture.rotation = Math.PI/2;
-		this.material = new THREE.MeshBasicMaterial({ map: this.texture, transparent: true });
-		//this.rot_material = new THREE.MeshBasicMaterial({ map: this.rot_texture, transparent: true/*, rotation: Math.PI / 2*/ });
+		this.material = new THREE.MeshBasicMaterial({ map: this.texture, transparent: false });
 	}
 
 	imageFallback() {
@@ -76,6 +73,7 @@ class GIF_Instance {
 
 		this.ctx.drawImage(this.image, 0, 0, this.image.width * ratio, this.image.height * ratio);
 		this.texture.needsUpdate = true;
+		this.material.needsUpdate = true;
 	}
 
 	loadListener() {
@@ -118,6 +116,7 @@ class GIF_Instance {
 					this.frames[this.currentFrame].x,
 					this.frames[this.currentFrame].y + this.drawOffsetY);
 				this.texture.needsUpdate = true;
+				this.material.needsUpdate = true;
 			}
 		}
 	}

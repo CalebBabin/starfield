@@ -124,12 +124,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 				for (let i = 0; i < emotes.emotes.length; i++) {
 					const emote = emotes.emotes[i];
-					if (emote) {
-						if (!emote.sprite) {
-							emote.sprite = new THREE.Mesh(plane_geometry, new THREE.MeshBasicMaterial({ map: emote.material.texture, transparent: true }));
-							emote.sprite.position.x += i * globalConfig.emoteScale;
-							emotes.group.add(emote.sprite);
-						}
+					if (emote && !emote.sprite) {
+						emote.sprite = new THREE.Mesh(plane_geometry, new THREE.MeshBasicMaterial({ map: emote.material.texture, transparent: true }));
+						emote.sprite.position.x += i * globalConfig.emoteScale;
+						emotes.group.add(emote.sprite);
 					}
 				}
 
