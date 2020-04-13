@@ -3,12 +3,13 @@ import * as THREE from 'three';
 const chatIntegration = require('./chat.js');
 
 const globalConfig = {
-	speed: 0.004,
+	speed: 0.0025,
 	emoteSpeedRatio: 0.75, // set to 1 for 1:1 movement with the star speed
 	emoteScale: 3,
 	starScale: 0.1,
 	starLength: 6,
 	spawnAreaSize: 100,
+	emoteSpawnRatio: 0.5,
 	safeSpace: 4,
 	spawnRate: 5,
 	cameraDistance: 250,
@@ -60,8 +61,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		document.body.appendChild(renderer.domElement);
 	}
 
+	let lastFrame = Date.now();
 	function draw() {
 		requestAnimationFrame(draw);
+		const speedTimeRatio = (Date.now() - lastFrame) / 16;
+		lastFrame = Date.now();
 
 		spawnTick += globalConfig.spawnRate;
 
@@ -85,7 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		for (let index = stars.length - 1; index >= 0; index--) {
 			const star = stars[index];
-			star.progress += globalConfig.speed;
+			star.progress += globalConfig.speed*speedTimeRatio;
 
 			star.mesh.position.z = star.progress * globalConfig.cameraDistance;
 
@@ -101,8 +105,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			if (!emotes.group) {
 				emotes.group = new THREE.Group();
 				const position = getSpawnPosition();
-				emotes.group.position.x = position.x;
-				emotes.group.position.y = position.y;
+				emotes.group.position.x = position.x*globalConfig.emoteSpawnRatio;
+				emotes.group.position.y = position.y*globalConfig.emoteSpawnRatio;
 				emotes.initGroup = true;
 			}
 
@@ -116,7 +120,7 @@ window.addEventListener('DOMContentLoaded', () => {
 				scene.remove(emotes.group);
 				chatIntegration.emotes.splice(index, 1);
 			} else {
-				emotes.progress += globalConfig.speed*globalConfig.emoteSpeedRatio;
+				emotes.progress += globalConfig.speed*globalConfig.emoteSpeedRatio*speedTimeRatio;
 
 				for (let i = 0; i < emotes.emotes.length; i++) {
 					const emote = emotes.emotes[i];
