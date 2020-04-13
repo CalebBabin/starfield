@@ -16,9 +16,9 @@ const globalConfig = {
 	cameraFar: 1000,
 }
 
-const getSpawnPosition = () => {
+const getSpawnPosition = (multiplier = 1) => {
 	const direction = Math.random()*Math.PI*2;
-	const distance = Math.random()*(globalConfig.spawnAreaSize - globalConfig.safeSpace) + globalConfig.safeSpace;
+	const distance = Math.random()*(globalConfig.spawnAreaSize*multiplier - globalConfig.safeSpace) + globalConfig.safeSpace;
 	const x = Math.sin(direction)*distance*widthRatio;
 	const y = Math.cos(direction)*distance*heightRatio;
 	return { x, y };
@@ -104,9 +104,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 			if (!emotes.group) {
 				emotes.group = new THREE.Group();
-				const position = getSpawnPosition();
-				emotes.group.position.x = position.x*globalConfig.emoteSpawnRatio;
-				emotes.group.position.y = position.y*globalConfig.emoteSpawnRatio;
+				const position = getSpawnPosition(globalConfig.emoteSpawnRatio);
+				emotes.group.position.x = position.x;
+				emotes.group.position.y = position.y;
 				emotes.initGroup = true;
 			}
 
