@@ -10,7 +10,7 @@ const globalConfig = {
 	starLength: 6,
 	spawnAreaSize: 100,
 	emoteSpawnRatio: 0.5,
-	safeSpace: 4,
+	safeSpace: 6,
 	spawnRate: 5,
 	cameraDistance: 250,
 	cameraFar: 1000,
