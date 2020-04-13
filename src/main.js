@@ -3,7 +3,7 @@ import * as THREE from 'three';
 const chatIntegration = require('./chat.js');
 
 const globalConfig = {
-	speed: 0.0025,
+	speed: 0.002,
 	emoteSpeedRatio: 0.75, // set to 1 for 1:1 movement with the star speed
 	emoteScale: 3,
 	starScale: 0.1,
