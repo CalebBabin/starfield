@@ -129,6 +129,9 @@ window.addEventListener('DOMContentLoaded', () => {
 						emote.sprite.position.x += i * globalConfig.emoteScale;
 						emotes.group.add(emote.sprite);
 					}
+					if (emote && emote.sprite) {
+						emote.sprite.material.needsUpdate = true;
+					}
 				}
 
 				if (emotes.initGroup) {
