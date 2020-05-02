@@ -84,7 +84,9 @@ function getEmoteArrayFromMessage(text, emotes) {
 
 
 const bttvEmotes = {};
-fetch('https://api.betterttv.net/2/channels/' + dehash(channels[0]))
+fetch('https://api.betterttv.net/2/channels/' + dehash(channels[0]), {
+	mode: 'no-cors',
+})
 	.then(json => json.json())
 	.then(data => {
 		if (!data.status || data.status != 404) {
@@ -95,7 +97,9 @@ fetch('https://api.betterttv.net/2/channels/' + dehash(channels[0]))
 		}
 	})
 
-fetch('https://api.betterttv.net/3/cached/emotes/global')
+fetch('https://api.betterttv.net/3/cached/emotes/global', {
+	mode: 'no-cors',
+})
 	.then(json => json.json())
 	.then(data => {
 		if (data && data.length > 0) {
