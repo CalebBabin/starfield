@@ -33,7 +33,7 @@ ChatInstance.dispatch = (e) => {
 const globalConfig = {
 	speed: 0.002,
 	emoteSpeedRatio: 0.75, // set to 1 for 1:1 movement with the star speed
-	emoteScale: 5,
+	emoteScale: 3,
 	starScale: 0.1,
 	starLength: 6,
 	spawnAreaSize: 100,
