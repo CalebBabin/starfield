@@ -1,11 +1,39 @@
 import * as THREE from 'three';
+import Chat from 'twitch-chat';
 
-const chatIntegration = require('./chat.js');
+let channels = ['moonmoon'];
+const query_vars = {};
+const query_parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+	query_vars[key] = value;
+});
+if (query_vars.channels) {
+	channels = query_vars.channels.split(',');
+}
+
+const ChatInstance = new Chat({
+	channels,
+})
+
+const emoteTextures = {};
+const pendingEmoteArray = [];
+ChatInstance.dispatch = (e) => {
+	const output = { emotes: [] };
+	for (let index = 0; index < e.emotes.length; index++) {
+		const emote = e.emotes[index];
+		if (!emoteTextures[emote.material.id]) {
+			emoteTextures[emote.material.id] = new THREE.CanvasTexture(emote.material.canvas);
+		}
+		emote.texture = emoteTextures[emote.material.id];
+		output.emotes.push(emote);
+	}
+	pendingEmoteArray.push(output);
+}
+
 
 const globalConfig = {
 	speed: 0.002,
 	emoteSpeedRatio: 0.75, // set to 1 for 1:1 movement with the star speed
-	emoteScale: 3,
+	emoteScale: 5,
 	starScale: 0.1,
 	starLength: 6,
 	spawnAreaSize: 100,
@@ -17,10 +45,10 @@ const globalConfig = {
 }
 
 const getSpawnPosition = (multiplier = 1) => {
-	const direction = Math.random()*Math.PI*2;
-	const distance = Math.random()*(globalConfig.spawnAreaSize*multiplier - globalConfig.safeSpace) + globalConfig.safeSpace;
-	const x = Math.sin(direction)*distance*widthRatio;
-	const y = Math.cos(direction)*distance*heightRatio;
+	const direction = Math.random() * Math.PI * 2;
+	const distance = Math.random() * (globalConfig.spawnAreaSize * multiplier - globalConfig.safeSpace) + globalConfig.safeSpace;
+	const x = Math.sin(direction) * distance * widthRatio;
+	const y = Math.cos(direction) * distance * heightRatio;
 	return { x, y };
 }
 
@@ -28,7 +56,7 @@ const widthRatio = Math.min(window.innerWidth / window.innerHeight, 1);
 const heightRatio = Math.min(window.innerHeight / window.innerWidth, 1);
 
 const plane_geometry = new THREE.PlaneBufferGeometry(globalConfig.emoteScale, globalConfig.emoteScale);
-const star_geometry = new THREE.BoxBufferGeometry(globalConfig.starScale, globalConfig.starScale, globalConfig.starScale*globalConfig.starLength);
+const star_geometry = new THREE.BoxBufferGeometry(globalConfig.starScale, globalConfig.starScale, globalConfig.starScale * globalConfig.starLength);
 const star_material = new THREE.MeshBasicMaterial({ color: 0xffffff });
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -64,6 +92,14 @@ window.addEventListener('DOMContentLoaded', () => {
 	let lastFrame = Date.now();
 	function draw() {
 		requestAnimationFrame(draw);
+
+		for (const key in emoteTextures) {
+			if (emoteTextures.hasOwnProperty(key)) {
+				const element = emoteTextures[key];
+				element.needsUpdate = true;
+			}
+		}
+
 		const speedTimeRatio = (Date.now() - lastFrame) / 16;
 		lastFrame = Date.now();
 
@@ -89,7 +125,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		for (let index = stars.length - 1; index >= 0; index--) {
 			const star = stars[index];
-			star.progress += globalConfig.speed*speedTimeRatio;
+			star.progress += globalConfig.speed * speedTimeRatio;
 
 			star.mesh.position.z = star.progress * globalConfig.cameraDistance;
 
@@ -99,10 +135,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		for (let index = 0; index < chatIntegration.emotes.length; index++) {
-			const emotes = chatIntegration.emotes[index];
+		for (let index = 0; index < pendingEmoteArray.length; index++) {
+			const emotes = pendingEmoteArray[index];
 
 			if (!emotes.group) {
+				emotes.progress = 0;
 				emotes.group = new THREE.Group();
 				const position = getSpawnPosition(globalConfig.emoteSpawnRatio);
 				emotes.group.position.x = position.x;
@@ -118,14 +155,14 @@ window.addEventListener('DOMContentLoaded', () => {
 					emotes.group.remove(emote.sprite);
 				}
 				scene.remove(emotes.group);
-				chatIntegration.emotes.splice(index, 1);
+				pendingEmoteArray.splice(index, 1);
 			} else {
-				emotes.progress += globalConfig.speed*globalConfig.emoteSpeedRatio*speedTimeRatio;
+				emotes.progress += globalConfig.speed * globalConfig.emoteSpeedRatio * speedTimeRatio;
 
 				for (let i = 0; i < emotes.emotes.length; i++) {
 					const emote = emotes.emotes[i];
 					if (emote && !emote.sprite) {
-						emote.sprite = new THREE.Mesh(plane_geometry, new THREE.MeshBasicMaterial({ map: emote.material.texture, transparent: true }));
+						emote.sprite = new THREE.Mesh(plane_geometry, new THREE.MeshBasicMaterial({ map: emote.texture, transparent: true }));
 						emote.sprite.position.x += i * globalConfig.emoteScale;
 						emotes.group.add(emote.sprite);
 					}
