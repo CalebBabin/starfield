@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import Chat from 'twitch-chat';
+import Chat from 'twitch-chat-emotes';
 
 let channels = ['moonmoon'];
 const query_vars = {};
@@ -16,7 +16,7 @@ const ChatInstance = new Chat({
 
 const emoteTextures = {};
 const pendingEmoteArray = [];
-ChatInstance.dispatch = (e) => {
+ChatInstance.on("emotes", (e) => {
 	const output = { emotes: [] };
 	for (let index = 0; index < e.emotes.length; index++) {
 		const emote = e.emotes[index];
@@ -27,7 +27,7 @@ ChatInstance.dispatch = (e) => {
 		output.emotes.push(emote);
 	}
 	pendingEmoteArray.push(output);
-}
+})
 
 
 const globalConfig = {
