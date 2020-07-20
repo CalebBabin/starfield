@@ -3205,9 +3205,9 @@ lodash.uniq@^4.5.0:
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
 lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+  version "4.17.19"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
 
 log-symbols@^2.2.0:
   version "2.2.0"
@@ -5172,13 +5172,6 @@ twitch-chat-emotes@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/twitch-chat-emotes/-/twitch-chat-emotes-0.1.7.tgz#4290340146c878bdc15b888803e66e829cae07b5"
   integrity sha512-1D8kZIZ+ZKgmV6At0Dq2coAyYUPpaI8be939JnJar8sKg5Sloj8Mh5GrA05JYHJ3AxrHDSYI3X/oDH81Wa/Lsg==
-  dependencies:
-    express "^4.17.1"
-    tmi.js "^1.5.0"
-
-"twitch-chat@github:CalebBabin/twitch-chat":
-  version "0.1.5"
-  resolved "https://codeload.github.com/CalebBabin/twitch-chat/tar.gz/6aba76bdf2160f82ed9c22df41a0aaf90f5d7079"
   dependencies:
     express "^4.17.1"
     tmi.js "^1.5.0"
