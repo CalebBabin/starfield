@@ -5038,10 +5038,10 @@ terser@^4.3.9:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-three@^0.115.0:
-  version "0.115.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.115.0.tgz#540d800c381b9da2334c024f0fbe4d23f84eb05e"
-  integrity sha512-mAV2Ky3RdcbdSbR9capI+tKLvRldWYxd4151PZTT/o7+U2jh9Is3a4KmnYwzyUAhB2ZA3pXSgCd2DOY4Tj5kow==
+three@^0.125.0:
+  version "0.125.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.125.0.tgz#19e922b9dc51ad0b706893aeee888de68e99850a"
+  integrity sha512-qL36qUGsPQ/Ofo/RZdXwHwM7A8wzUSAIyawtjIebJSPvounUQeneSqxI0aBY2iwKpseGy+RUtj3C5f/z4poyXw==
 
 through2@^2.0.0, through2@~2.0.3:
   version "2.0.5"
@@ -5172,13 +5172,6 @@ twitch-chat-emotes@^0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/twitch-chat-emotes/-/twitch-chat-emotes-0.1.7.tgz#4290340146c878bdc15b888803e66e829cae07b5"
   integrity sha512-1D8kZIZ+ZKgmV6At0Dq2coAyYUPpaI8be939JnJar8sKg5Sloj8Mh5GrA05JYHJ3AxrHDSYI3X/oDH81Wa/Lsg==
-  dependencies:
-    express "^4.17.1"
-    tmi.js "^1.5.0"
-
-"twitch-chat@github:CalebBabin/twitch-chat":
-  version "0.1.5"
-  resolved "https://codeload.github.com/CalebBabin/twitch-chat/tar.gz/6aba76bdf2160f82ed9c22df41a0aaf90f5d7079"
   dependencies:
     express "^4.17.1"
     tmi.js "^1.5.0"
