@@ -21,7 +21,6 @@ ChatInstance.on("emotes", (e) => {
 	const output = { emotes: [] };
 	for (let index = 0; index < e.length; index++) {
 		const emote = e[index];
-		console.log(emote);
 		if (!emoteTextures[emote.id]) {
 			emoteTextures[emote.id] = new THREE.CanvasTexture(emote.gif.canvas);
 		}
