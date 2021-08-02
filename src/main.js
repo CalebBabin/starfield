@@ -130,7 +130,7 @@ function draw() {
 
 	for (let index = stars.length - 1; index >= 0; index--) {
 		const star = stars[index];
-		star.progress += globalConfig.speed * speedTimeRatio;
+		star.progress += globalConfig.speed * speedTimeRatio * 1.1;
 
 		star.mesh.position.z = star.progress * globalConfig.cameraDistance;
 
