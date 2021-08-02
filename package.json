@@ -4,26 +4,31 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "parcel build src/index.html",
-		"start": "parcel src/index.html"
+		"build": "webpack --mode=production",
+		"start": "npx webpack serve"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/CalebBabin/3D-Pipes.git"
+		"url": "git+https://github.com/CalebBabin/starfield.git"
 	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/CalebBabin/3D-Pipes/issues"
+		"url": "https://github.com/CalebBabin/starfield/issues"
 	},
-	"homepage": "https://github.com/CalebBabin/3D-Pipes#readme",
+	"homepage": "https://github.com/CalebBabin/starfield#readme",
 	"dependencies": {
-		"js": "^0.1.0",
-		"parcel": "^1.12.4",
-		"sass": "^1.26.3",
-		"three": "^0.115.0",
-		"tmi.js": "^1.5.0",
-		"twitch-chat-emotes": "^0.1.7"
+		"css-loader": "^5.2.6",
+		"file-loader": "^6.2.0",
+		"html-loader": "^2.1.2",
+		"html-webpack-plugin": "^5.3.2",
+		"style-loader": "^3.0.0",
+		"three": "^0.131.1",
+		"twitch-chat-emotes": "^0.2.1",
+		"webpack": "^5.44.0",
+		"webpack-cli": "^4.7.2"
+	},
+	"devDependencies": {
+		"webpack-dev-server": "^3.11.2"
 	}
 }
