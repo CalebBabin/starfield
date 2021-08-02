@@ -48,12 +48,15 @@ const globalConfig = {
 const getSpawnPosition = (multiplier = 1, toggle = false) => {
 	let spawnAreaSize = globalConfig.spawnAreaSize;
 	let safeSpace = 0;
+	let distanceR = Math.random();
 	if (toggle) {
 		safeSpace = globalConfig.safeSpace;
 		spawnAreaSize *= 2;
+	} else {
+		distanceR = 1 - distanceR * distanceR;
 	}
 	const direction = Math.random() * Math.PI * 2;
-	const distance = Math.random() * (spawnAreaSize * multiplier - safeSpace) + safeSpace;
+	const distance = distanceR * (spawnAreaSize * multiplier - safeSpace) + safeSpace;
 	const x = Math.sin(direction) * distance * widthRatio;
 	const y = Math.cos(direction) * distance * heightRatio;
 	return { x, y };
