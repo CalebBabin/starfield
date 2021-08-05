@@ -47,7 +47,7 @@ const globalConfig = {
 
 const getSpawnPosition = (multiplier = 1, toggle = false) => {
 	let spawnAreaSize = globalConfig.spawnAreaSize;
-	let safeSpace = 0;
+	let safeSpace = globalConfig.safeSpace / 2;
 	let distanceR = Math.random();
 	if (toggle) {
 		safeSpace = globalConfig.safeSpace;
